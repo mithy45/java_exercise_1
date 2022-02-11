@@ -40,10 +40,14 @@ public class Freq implements Command
         try
         {
             List<String> list_freq = freq(java.nio.file.Files.readString(Paths.get(scanner.nextLine())), 3);
-            for (String freq : list_freq)
+            String s = new String();
+            int i;
+            for (i = 0; i < list_freq.size() - 1; i = i + 1)
             {
-                System.out.println(freq);
+                s = s.concat(list_freq.get(i) + " ");
             }
+            s = s.concat(list_freq.get(i));
+            System.out.println(s);
         }
         catch (Exception e)
         {
