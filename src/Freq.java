@@ -1,8 +1,5 @@
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
@@ -18,19 +15,14 @@ public class Freq implements Command
 
     public static List<String> freq(String file_content, long limit)
     {
-        List<String> content_list = Arrays.asList(file_content.split("\\s+"));
+        List<String> content_list = Arrays.asList(file_content.toLowerCase(Locale.ROOT).split("\\s+"));
         Map<Object, Integer> frequencyMap = content_list.stream()
                 .collect(toMap(
                         s -> s,
                         s -> 1,
                         Integer::sum));
-        List<String> list_freq;
-        if (limit == 0)
-            list_freq = content_list.stream()
-                .sorted(comparing(frequencyMap::get).reversed()).distinct().collect(toList());
-        else
-            list_freq = content_list.stream()
-                    .sorted(comparing(frequencyMap::get).reversed()).distinct().limit(limit).collect(toList());
+        List<String> list_freq = content_list.stream()
+                .sorted(comparing(frequencyMap::get).reversed()).distinct().limit(limit).collect(toList());
         return list_freq;
     }
 
