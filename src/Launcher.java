@@ -9,7 +9,7 @@ public class Launcher
         boolean found, run = true;
         String res;
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Command> command_list = new ArrayList<Command>(Arrays.asList(new Fibo(), new Freq(), new Quit()));
+        ArrayList<Command> command_list = new ArrayList<Command>(Arrays.asList(new Fibo(), new Freq(), new Quit(), new Predict()));
         do
         {
             found = false;
