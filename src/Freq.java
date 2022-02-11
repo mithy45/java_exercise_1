@@ -15,7 +15,7 @@ public class Freq implements Command
 
     public static List<String> freq(String file_content, long limit)
     {
-        List<String> content_list = Arrays.asList(file_content.toLowerCase(Locale.ROOT).split("\\s+"));
+        List<String> content_list = Arrays.asList(file_content.toLowerCase().split("\\s+"));
         Map<Object, Integer> frequencyMap = content_list.stream()
                 .collect(toMap(
                         s -> s,

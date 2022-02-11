@@ -39,7 +39,7 @@ public class Predict implements Command
         String content = new String();
         try
         {
-            content = Files.readString(Paths.get(scanner.nextLine())).toLowerCase(Locale.ROOT);
+            content = Files.readString(Paths.get(scanner.nextLine())).toLowerCase();
         }
         catch (Exception e) {
             System.err.println("Unreadable file: " + e.getClass().toString() + " " + e.getMessage());
@@ -48,7 +48,7 @@ public class Predict implements Command
         String mot = new String();
         try
         {
-            if (!content.contains(mot = scanner.nextLine()))
+            if (!content.contains(mot = scanner.nextLine().toLowerCase()))
             {
                 System.err.println("Le mot n'est pas dans le texte");
                 return false;
@@ -57,6 +57,7 @@ public class Predict implements Command
         catch (Exception e)
         {
             System.err.println("Erreur lors de l'écriture: " + e.getClass().toString() + " " + e.getMessage());
+            return false;
         }
         String sentence = new String();
         String current_word = new String(mot);
