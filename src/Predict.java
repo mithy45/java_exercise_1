@@ -1,6 +1,8 @@
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -37,7 +39,7 @@ public class Predict implements Command
         String content = new String();
         try
         {
-            content = java.nio.file.Files.readString(Paths.get(scanner.nextLine()));
+            content = Files.readString(Paths.get(scanner.nextLine())).toLowerCase(Locale.ROOT);
         }
         catch (Exception e) {
             System.err.println("Unreadable file: " + e.getClass().toString() + " " + e.getMessage());
@@ -56,13 +58,18 @@ public class Predict implements Command
         {
             System.err.println("Erreur lors de l'écriture: " + e.getClass().toString() + " " + e.getMessage());
         }
-        String sentence = new String(mot);
+        String sentence = new String();
         String current_word = new String(mot);
-        int count = 1;
+        int count = 0;
         while (count != 20)
         {
             if (!current_word.isEmpty())
-                sentence = sentence + " " + current_word;
+            {
+                if (sentence.isEmpty())
+                    sentence = current_word;
+                else
+                    sentence = sentence + " " + current_word;
+            }
             current_word = findBestNextWordOf(content, current_word);
             count++;
         }
